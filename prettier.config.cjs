@@ -2,7 +2,7 @@
 module.exports = {
   printWidth: 80,
   tabWidth: 2,
-  trailingComma: "all",
+  trailingComma: 'all',
   singleQuote: true,
   semi: true,
   overrides: [
@@ -14,8 +14,16 @@ module.exports = {
       },
     },
   ],
-  plugins: ['@trivago/prettier-plugin-sort-imports'],
-  importOrder: ['<BUILT_IN_MODULES>', '', '<THIRD_PARTY_MODULES>', '', '^@/(.*)$', '', '^[.]'],
+  plugins: ['@ianvs/prettier-plugin-sort-imports'],
+  importOrder: [
+    '<BUILT_IN_MODULES>',
+    '',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '^@/(.*)$',
+    '',
+    '^[.]',
+  ],
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
   importOrderTypeScriptVersion: '5.0.0',
 };

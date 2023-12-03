@@ -4,7 +4,7 @@ function App() {
   console.log('hello');
   return (
     <>
-      <h2>YOUTUBE CLONE</h2>
+      <p className="text-3xl font-bold underline">YOUTUBE CLONE</p>
       <button>클릭</button>
     </>
   );

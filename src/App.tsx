@@ -8,13 +8,13 @@ function App() {
     <>
       {/** Header */}
       <div className="dark:bg-slate-900 flex p-3 justify-between items-center">
-        <div className="flex">
+        <div className="flex-1 shrink-0">
           <button className="text-2xl mr-1.5 text-red-500">
             <FaYoutube />
           </button>
           <span className="text-2xl dark:text-white">Youtube</span>
         </div>
-        <div className="w-96">
+        <div className="w-96 flex-[2_1_0]">
           <form className="flex">
             <input
               type="text"
@@ -26,7 +26,7 @@ function App() {
             </button>
           </form>
         </div>
-        <div className=""></div>
+        <div className="flex-1"></div>
       </div>
     </>
   );

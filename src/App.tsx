@@ -2,6 +2,7 @@ import './App.css';
 
 import Header from './components/Header';
 import { mostPopularAPI } from './mocks/mostPopularAPI';
+import { getTimeSincePublication } from './utils';
 
 function App() {
   return (
@@ -19,9 +20,11 @@ function App() {
               <h3 className="overflow-hidden text-ellipsis font-semibold line-clamp-2">
                 {item.snippet.title}
               </h3>
-              <span className=" dark:text-gray-600">
-                {item.snippet.channelTitle}
-              </span>
+              <div className="dark:text-gray-600">
+                <span>{item.snippet.channelTitle}</span>
+                <span> &#8226; </span>
+                <span>{getTimeSincePublication(item.snippet.publishedAt)}</span>
+              </div>
             </div>
           </div>
         ))}

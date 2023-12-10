@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom';
+
 import './App.css';
 
 import Header from './components/Header';
@@ -8,7 +10,9 @@ function App() {
   return (
     <>
       <Header />
-      {/** Contents */}
+      <div id="contents">
+        <Outlet />
+      </div>
       <div className="dark:bg-slate-950 h-full w-full bg-cover flex flex-wrap justify-center">
         {mostPopularAPI.items.map((item) => (
           <div

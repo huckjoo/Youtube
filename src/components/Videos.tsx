@@ -5,7 +5,7 @@ import { getTimeSincePublication } from '../utils';
 
 const Videos = () => {
   const { searchId } = useParams();
-  console.log(searchId);
+
   return (
     <>
       <div className="dark:bg-slate-950 h-full w-full bg-cover flex flex-wrap justify-center">

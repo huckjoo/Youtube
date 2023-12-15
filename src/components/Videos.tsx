@@ -1,15 +1,53 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { searchAPI } from '../mocks/searchAPI';
 import { getTimeSincePublication } from '../utils';
+
+interface Item {
+  id: {
+    kind: string;
+    videoId: string;
+  };
+  snippet: {
+    thumbnails: {
+      medium: {
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+    title: string;
+    channelTitle: string;
+    publishedAt: string;
+  };
+}
+
+interface searchData {
+  items: Item[];
+}
 
 const Videos = () => {
   const { searchId } = useParams();
-  console.log(import.meta.env.VITE_YOUTUBE_API_KEY);
+  const [searchData, setSearchData] = useState<searchData>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${
+          import.meta.env.VITE_YOUTUBE_API_KEY
+        }`,
+      );
+      const jsonData: searchData = await response.json();
+      setSearchData(jsonData);
+    };
+
+    fetchData();
+  }, [searchId]);
+
   return (
     <>
       <div className="dark:bg-slate-950 h-full w-full bg-cover flex flex-wrap justify-center">
-        {searchAPI.items
+        {searchData?.items
           .filter((x) => x.id.kind === 'youtube#video')
           .map((item) => (
             <div

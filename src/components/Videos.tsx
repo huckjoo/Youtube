@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
 import { getTimeSincePublication } from '../utils';
@@ -28,21 +28,24 @@ interface searchData {
 
 const Videos = () => {
   const { searchId } = useParams();
-  const [searchData, setSearchData] = useState<searchData>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
+  const {
+    isPending,
+    error,
+    data: searchData,
+  } = useQuery({
+    queryKey: [`data/${searchId}`],
+    queryFn: () =>
+      fetch(
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${
           import.meta.env.VITE_YOUTUBE_API_KEY
         }`,
-      );
-      const jsonData: searchData = await response.json();
-      setSearchData(jsonData);
-    };
+      ).then((res) => res.json()),
+  });
 
-    fetchData();
-  }, [searchId]);
+  if (isPending) return 'Loading...';
+
+  if (error) return 'An error has occureed: ' + error.message;
 
   return (
     <>

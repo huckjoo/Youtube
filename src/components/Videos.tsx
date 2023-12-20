@@ -22,25 +22,25 @@ interface Item {
   };
 }
 
-interface searchData {
+interface SearchData {
   items: Item[];
 }
 
 const Videos = () => {
   const { searchId } = useParams();
 
-  const {
-    isPending,
-    error,
-    data: searchData,
-  } = useQuery({
+  const fetchSearchData = async (): Promise<SearchData> => {
+    const response = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${
+        import.meta.env.VITE_YOUTUBE_API_KEY
+      }`,
+    ).then((res) => res.json());
+    return response;
+  };
+
+  const { isPending, error, data } = useQuery({
     queryKey: [`data/${searchId}`],
-    queryFn: () =>
-      fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${
-          import.meta.env.VITE_YOUTUBE_API_KEY
-        }`,
-      ).then((res) => res.json()),
+    queryFn: () => fetchSearchData(),
   });
 
   if (isPending) return 'Loading...';
@@ -50,7 +50,7 @@ const Videos = () => {
   return (
     <>
       <div className="dark:bg-slate-950 h-full w-full bg-cover flex flex-wrap justify-center">
-        {searchData?.items
+        {data?.items
           .filter((x) => x.id.kind === 'youtube#video')
           .map((item) => (
             <div

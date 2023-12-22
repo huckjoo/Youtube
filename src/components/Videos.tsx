@@ -39,7 +39,7 @@ const Videos = () => {
   };
 
   const { isPending, error, data } = useQuery({
-    queryKey: [`data/${searchId}`],
+    queryKey: ['data', searchId],
     queryFn: () => fetchSearchData(),
   });
 

@@ -10,9 +10,9 @@ const Header = () => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/search/${inputText}`);
+    navigate(`/videos/${inputText}`);
   };
 
   return (

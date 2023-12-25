@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'search/:searchId',
+        path: 'videos/:searchId',
         element: <Videos />,
       },
     ],

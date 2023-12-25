@@ -7,6 +7,7 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Videos from './components/Videos.tsx';
+import VideoDetailPage from './page/VideoDetailPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: 'videos/:searchId',
         element: <Videos />,
+      },
+      {
+        path: 'videos/watch/:videoId',
+        element: <VideoDetailPage />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { getTimeSincePublication } from '../utils';
 
@@ -28,6 +28,7 @@ interface SearchData {
 
 const Videos = () => {
   const { searchId } = useParams();
+  const navigate = useNavigate();
 
   const fetchSearchData = async (): Promise<SearchData> => {
     const response = await fetch(
@@ -36,6 +37,10 @@ const Videos = () => {
       }`,
     ).then((res) => res.json());
     return response;
+  };
+
+  const handleClick = (videoId: string) => {
+    navigate(`/videos/watch/${videoId}`);
   };
 
   const { isPending, error, data } = useQuery({
@@ -53,9 +58,10 @@ const Videos = () => {
         {data?.items
           .filter((x) => x.id.kind === 'youtube#video')
           .map((item) => (
-            <div
+            <a
               key={item.id.videoId}
               className="dark:text-white m-2 max-w-xs cursor-pointer mb-3"
+              onClick={() => handleClick(item.id.videoId)}
             >
               <img src={item.snippet.thumbnails.medium.url} />
               <div id="details" className="pt-2">
@@ -70,7 +76,7 @@ const Videos = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
       </div>
     </>

@@ -9,6 +9,7 @@ interface Item {
     videoId: string;
   };
   snippet: {
+    channelId: string;
     thumbnails: {
       medium: {
         url: string;
@@ -39,8 +40,8 @@ const Videos = () => {
     return response;
   };
 
-  const handleClick = (videoId: string) => {
-    navigate(`/videos/watch/${videoId}`);
+  const handleClick = (videoId: string, channelId: string) => {
+    navigate(`/videos/watch/${videoId}`, { state: channelId });
   };
 
   const { isPending, error, data } = useQuery({
@@ -61,7 +62,9 @@ const Videos = () => {
             <a
               key={item.id.videoId}
               className="dark:text-white m-2 max-w-xs cursor-pointer mb-3"
-              onClick={() => handleClick(item.id.videoId)}
+              onClick={() =>
+                handleClick(item.id.videoId, item.snippet.channelId)
+              }
             >
               <img src={item.snippet.thumbnails.medium.url} />
               <div id="details" className="pt-2">

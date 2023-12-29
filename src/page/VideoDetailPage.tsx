@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const VideoDetailPage = () => {
   const { videoId } = useParams();
+  const { state: channelId } = useLocation();
 
   // const fetchVideoData = async () => {
   //   const response = await fetch(
@@ -15,7 +16,7 @@ const VideoDetailPage = () => {
 
   const fetchChannelsData = async () => {
     const response = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCtCiO5t2voB14CmZKTkIzPQ&key=${
+      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${
         import.meta.env.VITE_YOUTUBE_API_KEY
       }`,
     ).then((res) => res.json());

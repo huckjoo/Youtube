@@ -28,13 +28,14 @@ const Header = () => {
   return (
     <div className="relative mb-16">
       <div className="dark:bg-slate-950 flex p-3 justify-between items-center fixed top-0 left-0 right-0">
-        <div className="flex-1 shrink-0 " onClick={handleClick}>
-          <button className="text-2xl mr-1.5 text-red-500">
+        <div
+          className="flex flex-1 text-2xl shrink-0 items-center"
+          onClick={handleClick}
+        >
+          <button className=" mr-1.5 text-red-500">
             <FaYoutube />
           </button>
-          <span className="text-2xl dark:text-white cursor-pointer">
-            Youtube
-          </span>
+          <span className=" dark:text-white cursor-pointer">Youtube</span>
         </div>
         <div className="w-96 flex-[2_1_0]">
           <form className="flex" onSubmit={handleSubmit}>

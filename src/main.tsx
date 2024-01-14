@@ -6,6 +6,7 @@ import './index.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import HotVideos from './components/hotVideos.tsx';
 import Videos from './components/Videos.tsx';
 import VideoDetailPage from './page/VideoDetailPage.tsx';
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      { path: '/' || '/*', element: <HotVideos /> },
       {
         path: 'videos/:searchId',
         element: <Videos />,

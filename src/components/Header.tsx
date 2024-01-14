@@ -42,7 +42,7 @@ const Header = () => {
             <input
               type="text"
               onChange={handleOnchange}
-              className="text-xl mr-2 text-white w-full rounded-md border-0 bg-slate-950 placeholder:text-gray-400 ring-1 ring-inset ring-gray-600"
+              className="text-xl mr-2 text-white w-full rounded-md border-0 bg-slate-950 placeholder:text-gray-400 ring-1 ring-inset ring-gray-600 outline-none"
               placeholder="Search"
               value={inputText}
             ></input>

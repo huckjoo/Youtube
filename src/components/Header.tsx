@@ -1,11 +1,13 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { FaYoutube } from 'react-icons/fa';
 import { IoIosSearch } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Header = () => {
   const [inputText, setInputText] = useState('');
   const navigate = useNavigate();
+  const { searchKeyword } = useParams();
+
   const handleOnchange = (e: { target: { value: SetStateAction<string> } }) => {
     setInputText(e.target.value);
   };
@@ -20,6 +22,8 @@ const Header = () => {
     setInputText('');
     navigate(`/`);
   };
+
+  useEffect(() => setInputText(searchKeyword || ''), [searchKeyword]);
 
   return (
     <div className="relative mb-16">

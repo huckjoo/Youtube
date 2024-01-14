@@ -28,12 +28,12 @@ interface SearchData {
 }
 
 const Videos = () => {
-  const { searchId } = useParams();
+  const { searchKeyword } = useParams();
   const navigate = useNavigate();
 
   const fetchSearchData = async (): Promise<SearchData> => {
     const response = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchKeyword}&key=${
         import.meta.env.VITE_YOUTUBE_API_KEY
       }`,
     ).then((res) => res.json());
@@ -45,7 +45,7 @@ const Videos = () => {
   };
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['data', searchId],
+    queryKey: ['data', searchKeyword],
     queryFn: () => fetchSearchData(),
   });
 

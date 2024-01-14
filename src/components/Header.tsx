@@ -32,10 +32,10 @@ const Header = () => {
           className="flex flex-1 text-2xl shrink-0 items-center"
           onClick={handleClick}
         >
-          <button className=" mr-1.5 text-red-500">
+          <button className=" mr-1.5 text-brand">
             <FaYoutube />
           </button>
-          <span className=" dark:text-white cursor-pointer">Youtube</span>
+          <h2 className=" dark:text-white cursor-pointer">Youtube</h2>
         </div>
         <div className="w-96 flex-[2_1_0]">
           <form className="flex" onSubmit={handleSubmit}>
